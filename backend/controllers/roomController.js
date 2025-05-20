@@ -120,7 +120,7 @@ exports.joinRoom = async (req, res) => {
 
     // Initialize positions for this player in gameState.positions
     room.gameState.positions[sessionId] = defaultPositions[availableColor];
-
+    room.markModified("gameState.positions");
     await room.save();
 
     return res.json({

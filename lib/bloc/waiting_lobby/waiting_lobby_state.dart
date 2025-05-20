@@ -11,8 +11,8 @@ class LobbyLoading extends WaitingLobbyState {}
 
 class LobbyLoaded extends WaitingLobbyState {
   final List<String> players;
-
-  const LobbyLoaded(this.players);
+  final String hostId;
+  const LobbyLoaded(this.players, this.hostId);
 
   @override
   List<Object?> get props => [players];

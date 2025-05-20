@@ -27,7 +27,8 @@ class StartGame extends WaitingLobbyEvent {
 }
 class PlayersUpdated extends WaitingLobbyEvent {
   final List<String> players;
-  PlayersUpdated(this.players);
+  final String hostId;
+  PlayersUpdated(this.players, this.hostId);
 }
 
 class GameStartedEvent extends WaitingLobbyEvent {

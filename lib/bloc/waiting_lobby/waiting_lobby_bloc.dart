@@ -13,7 +13,7 @@ class WaitingLobbyBloc extends Bloc<WaitingLobbyEvent, WaitingLobbyState> {
   WaitingLobbyBloc({required this.roomId}) : super(LobbyLoading()) {
     on<LoadPlayers>(_onLoadPlayers);
     on<StartGame>(_onStartGame);
-    on<PlayersUpdated>((event, emit) => emit(LobbyLoaded(event.players)));
+    on<PlayersUpdated>((event, emit) => emit(LobbyLoaded(event.players, event.hostId)));
     on<GameStartedEvent>((event, emit) => emit(GameStarted(event.players)));
 
   }
@@ -41,8 +41,9 @@ class WaitingLobbyBloc extends Bloc<WaitingLobbyEvent, WaitingLobbyState> {
                     (player) => player["username"].toString(),
                   ) // Extract only usernames
                   .toList();
+          String hostId = data["hostId"].toString();
           print("📢 Players list received: $players");
-          add(PlayersUpdated(players));
+          add(PlayersUpdated(players,hostId));
         } else if (data["type"] == "game_started") {
           List<String> players =
               data["players"]
